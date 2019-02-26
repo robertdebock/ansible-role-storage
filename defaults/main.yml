@@ -1,0 +1,44 @@
+---
+# defaults file for storage
+
+# storage_partitions:
+#   - name: /dev/sdb
+#     number: 1
+#     part_end: 4GiB
+#   - name: /dev/sdb
+#     number: 2
+#     flags:
+#       - lvm
+#     part_start: 4GiB
+#     part_end: 8GiB
+
+# Sizes in megabytes, minumum of 4.
+# storage_volumegroups:
+#   - name: group1
+#     device: /dev/sdb2
+#     size: 128
+#   - name: group2
+#     device: /dev/sdb2
+#     size: 256
+
+# Sizes in megabytes.
+# storage_volumes:
+#   - name: var1
+#     vg: group1
+#     size: 16
+
+# storage_filesystems:
+#   - name: /dev/group1/var
+#     filesystem: ext4
+
+# storage_mounts:
+#   - name: /var
+#     src: /dev/group1/var1
+
+# To update packages this role places on the system, set `storage_package_state` to `latest`.
+storage_package_state: present
+
+# Some Docker containers do not allow managing services, rebooting and writing
+# to some locations in /etc. The role skips tasks that will typically fail in
+# Docker. With this parameter you can tell the role to -not- skip these tasks.
+storage_ignore_docker: yes

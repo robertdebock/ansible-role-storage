@@ -1,0 +1,8 @@
+---
+# handlers file for storage
+- name: restart storage
+  service:
+    name: "{{ storage_service }}"
+    state: restarted
+  when:
+    - ansible_virtualization_type != "docker" or storage_ignore_docker

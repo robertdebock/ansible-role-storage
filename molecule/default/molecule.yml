@@ -1,0 +1,59 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: storage-alpine-edge
+    image: alpine:edge
+    command: sh -c "while true ; do sleep 1 ; done"
+  - name: storage-alpine-latest
+    image: alpine:latest
+    command: sh -c "while true ; do sleep 1 ; done"
+  - name: storage-archlinux
+    image: archlinux/base
+  - name: storage-centos-6
+    image: centos:6
+  - name: storage-centos-latest
+    image: centos:latest
+  - name: storage-debian-latest
+    image: debian:latest
+  - name: storage-debian-stable
+    image: debian:stable
+  - name: storage-debian-unstable
+    image: debian:unstable
+  - name: storage-fedora-latest
+    image: fedora:latest
+  - name: storage-fedora-rawhide
+    image: fedora:rawhide
+  - name: storage-opensuse-leap
+    image: opensuse:leap
+  - name: storage-opensuse-tumbleweed
+    image: opensuse:tumbleweed
+  - name: storage-ubuntu-latest
+    image: ubuntu:latest
+  - name: storage-ubuntu-rolling
+    image: ubuntu:artful
+  - name: storage-ubuntu-devel
+    image: ubuntu:devel
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      all:
+        storage_ignore_docker: no
+    host_vars:
+      storage-fedora-rawhide:
+        ansible_python_interpreter: /usr/bin/python3
+  lint:
+    name: ansible-lint
+scenario:
+  name: default
+verifier:
+  name: goss
+  lint:
+    name: yamllint
