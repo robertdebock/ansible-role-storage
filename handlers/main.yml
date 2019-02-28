@@ -6,3 +6,12 @@
 
 - name: refresh facts
   setup:
+
+- name: include mount
+  include: mount.yml
+  with_items:
+    - "{{ storage_mounts }}"
+  loop_control:
+    loop_var: mount
+  when:
+    - storage_mounts is defined
