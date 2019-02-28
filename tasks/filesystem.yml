@@ -8,5 +8,3 @@
   filesystem:
     dev: "{{ filesystem.name }}"
     fstype: "{{ filesystem.fstype | default(storage_default_fstype) }}"
-  loop_control:
-    label: "{{ filesystem.name }}"

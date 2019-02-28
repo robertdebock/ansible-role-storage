@@ -15,5 +15,3 @@
     part_start: "{{ partition.part_start | default(omit) }}"
     part_end: "{{ partition.part_end | default(omit) }}"
     state: present
-  loop_control:
-    label: "{{ partition.name }}"

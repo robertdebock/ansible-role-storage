@@ -12,5 +12,3 @@
     lv: "{{ volume.name }}"
     vg: "{{ volume.vg }}"
     size: "{{ volume.size }}"
-  loop_control:
-    label: "{{ volume.name }}"
