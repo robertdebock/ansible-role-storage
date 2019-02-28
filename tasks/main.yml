@@ -36,7 +36,7 @@
   loop_control:
     loop_var: volumegroup
   when:
-    - storage_volumes is defined
+    - storage_volumegroups is defined
 
 - name: include volume
   include: volume.yml
@@ -54,7 +54,7 @@
   loop_control:
     loop_var: filesystem
   when:
-    - storage_mounts is defined
+    - storage_filesystems is defined
 
 - name: include mount
   include: mount.yml
