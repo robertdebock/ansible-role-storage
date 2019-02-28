@@ -55,7 +55,7 @@
     loop_var: filesystem
   when:
     - storage_mounts is defined
- 
+
 - name: include mount
   include: mount.yml
   with_items:
