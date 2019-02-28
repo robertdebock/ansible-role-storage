@@ -1,0 +1,16 @@
+---
+- name: test volume
+  assert:
+    that:
+      - volume.name is defined
+      - volume.vg is defined
+      - volume.size is defined
+      - volume.size | int
+
+- name: create logical volume
+  lvol:
+    lv: "{{ volume.name }}"
+    vg: "{{ volume.vg }}"
+    size: "{{ volume.size }}"
+  loop_control:
+    label: "{{ volume.name }}"

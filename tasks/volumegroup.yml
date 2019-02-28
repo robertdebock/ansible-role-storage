@@ -1,0 +1,15 @@
+---
+- name: test volumegroup
+  assert:
+    that:
+      - volumegroup.name is defined
+      - volumegroup.device is defined
+      - volumegroup.size is defined
+      - volumegroup.size | int
+      - volumegroup.size >= 4
+
+- name: create volume groups
+  lvg:
+    vg: "{{ volumegroup.name }}"
+    pvs: "{{ volumegroup.device }}"
+    pesize: "{{ volumegroup.size / 4 }}"

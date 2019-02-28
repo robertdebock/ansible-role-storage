@@ -1,0 +1,12 @@
+---
+- name: test storage_filesystems
+  assert:
+    that:
+      - filesystem.name is defined
+
+- name: create filesystems
+  filesystem:
+    dev: "{{ filesystem.name }}"
+    fstype: "{{ filesystem.fstype | default(storage_default_fstype) }}"
+  loop_control:
+    label: "{{ filesystem.name }}"

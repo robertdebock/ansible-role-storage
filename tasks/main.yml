@@ -7,51 +7,6 @@
       - storage_package_state == "present" or
         storage_package_state == "latest" or
         storage_package_state == "absent"
-      - storage_ignore_docker is defined
-      - storage_ignore_docker or
-        not storage_ignore_docker
-
-- name: test storage_partitions
-  assert:
-    that:
-      - item.name is defined
-      - item.number is defined
-  with_items:
-    - "{{ storage_partitions }}"
-  when:
-    - storage_partitions is defined
-
-- name: test storage_volumegroups
-  assert:
-    that:
-      - item.name is defined
-      - item.device is defined
-      - item.size is defined
-      - item.size | int
-      - item.size >= 4
-  with_items:
-    - "{{ storage_volumegroups }}"
-  when:
-    - storage_volumegroups is defined
-
-- name: test storage_filesystems
-  assert:
-    that:
-      - item.name is defined
-  with_items:
-    - "{{ storage_filesystems }}"
-  when:
-    - storage_filesystems is defined
-
-- name: test storage_mounts
-  assert:
-    that:
-      - item.name is defined
-      - item.src is defined
-  with_items:
-    - "{{ storage_mounts }}"
-  when:
-    - storage_mounts is defined
 
 - name: install requirements
   package:
@@ -61,76 +16,51 @@
   until: storage_install_requirements is succeeded
   retries: 3
 
-- name: create partitions
-  parted:
-    device: "{{ item.name }}"
-    number: "{{ item.number }}"
-    flags: "{{ item.flags | default(omit) }}"
-    part_start: "{{ item.part_start | default(omit) }}"
-    part_end: "{{ item.part_end | default(omit) }}"
-    state: present
+- name: include partition
+  include: partition.yml
   with_items:
     - "{{ storage_partitions }}"
+  loop_control:
+    loop_var: partition
   when:
     - storage_partitions is defined
-  loop_control:
-    label: "{{ item.name }}"
 
-- name: create volume groups
-  lvg:
-    vg: "{{ item.name }}"
-    pvs: "{{ item.device }}"
-    pesize: "{{ item.size / 4 }}"
+- name: show shit
+  debug:
+    var: storage_volumegroups
+
+- name: include volumegroup
+  include: volumegroup.yml
   with_items:
     - "{{ storage_volumegroups }}"
-  when:
-    - storage_volumegroups is defined
   loop_control:
-    label: "{{ item.name }}"
-
-- name: create logical volumes
-  lvol:
-    lv: "{{ item.name }}"
-    vg: "{{ item.vg }}"
-    size: "{{ item.size }}"
-  with_items:
-    - "{{ storage_volumes }}"
+    loop_var: volumegroup
   when:
     - storage_volumes is defined
-  loop_control:
-    label: "{{ item.name }}"
 
-- name: create filesystems
-  filesystem:
-    dev: "{{ item.name }}"
-    fstype: "{{ item.fstype | default('ext4') }}"
+- name: include volume
+  include: volume.yml
+  with_items:
+    - "{{ storage_volumes }}"
+  loop_control:
+    loop_var: volume
+  when:
+    - storage_volumes is defined
+
+- name: include filesystem
+  include: filesystem.yml
   with_items:
     - "{{ storage_filesystems }}"
-  when:
-    - storage_filesystems is defined
   loop_control:
-    label: "{{ item.name }}"
-
-# - name: create mountpoints
-#   file:
-#     path: "{{ item.name }}"
-#     state: directory
-#   with_items:
-#     - "{{ storage_mounts }}"
-#   when:
-#     - storage_mounts is defined
-#   loop_control:
-#     label: "{{ item.name }}"
-
-- name: mount filesystems
-  mount:
-    path: "{{ item.name }}"
-    src: "{{ item.src }}"
-    fstype: "{{ item.fstype | default('ext4') }}"
-    state: mounted
-  with_items:
-    - "{{ storage_mounts }}"
+    loop_var: filesystem
   when:
     - storage_mounts is defined
+ 
+- name: include mount
+  include: mount.yml
+  with_items:
+    - "{{ storage_mounts }}"
   loop_control:
-    label: "{{ item.name }}"
+    loop_var: mount
+  when:
+    - storage_mounts is defined

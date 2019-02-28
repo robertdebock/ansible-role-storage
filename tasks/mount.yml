@@ -1,0 +1,34 @@
+---
+- name: test storage_mounts
+  assert:
+    that:
+      - mount.name is defined
+      - mount.src is defined
+
+- name: create mountpoint
+  file:
+    path: "{{ mount.name }}"
+    owner: "{{ mount.owner | default(omit) }}"
+    group: "{{ mount.group | default(omit) }}"
+    mode: "{{ mount.mode | default(omit) }}"
+    state: directory
+  loop_control:
+    label: "{{ mount.name }}"
+  with_items:
+    - "{{ ansible_mounts }}"
+
+- name: mount filesystems
+  mount:
+    path: "{{ mount.name }}"
+    src: "{{ mount.src }}"
+    fstype: "{{ mount.fstype | default(storage_default_fstype) }}"
+    opts: "{{ mount.opts | default(omit) }}"
+    boot: "{{ mount.boot | default(omit) }}"
+    dump: "{{ mount.dump | default(omit) }}"
+    passno: "{{ mount.passno | default(omit) }}"
+    state: mounted
+  loop_control:
+    label: "{{ mount.name }}"
+  notify:
+    - reload systemd
+    - refresh facts

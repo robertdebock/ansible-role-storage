@@ -33,6 +33,8 @@ These variables are set in `defaults/main.yml`:
 ---
 # defaults file for storage
 
+storage_default_fstype: ext4
+
 # storage_partitions:
 #   - name: /dev/sdb
 #     number: 1
@@ -66,6 +68,13 @@ These variables are set in `defaults/main.yml`:
 # storage_mounts:
 #   - name: /var
 #     src: /dev/group1/var1
+#     owner: root
+#     group: root
+#     mode: 755
+#     opts: defaults
+#     boot: yes
+#     dump: 0
+#     passno: 2
 
 # To update packages this role places on the system, set `storage_package_state` to `latest`.
 storage_package_state: present
