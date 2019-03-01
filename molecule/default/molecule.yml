@@ -32,8 +32,6 @@ platforms:
     image: fedora:rawhide
   - name: storage-opensuse-leap
     image: opensuse:leap
-  - name: storage-opensuse-tumbleweed
-    image: opensuse:tumbleweed
   - name: storage-ubuntu-latest
     image: ubuntu:latest
   - name: storage-ubuntu-rolling
