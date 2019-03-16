@@ -3,15 +3,11 @@
 - name: test veriables and environment
   assert:
     that:
-      - storage_package_state is defined
-      - storage_package_state == "present" or
-        storage_package_state == "latest" or
-        storage_package_state == "absent"
 
 - name: install requirements
   package:
     name: "{{ storage_requirements }}"
-    state: "{{ storage_package_state }}"
+    state: present
   register: storage_install_requirements
   until: storage_install_requirements is succeeded
   retries: 3

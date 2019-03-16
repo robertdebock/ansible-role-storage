@@ -43,11 +43,3 @@ storage_default_fstype: ext4
 #     boot: yes
 #     dump: 0
 #     passno: 2
-
-# To update packages this role places on the system, set `storage_package_state` to `latest`.
-storage_package_state: present
-
-# Some Docker containers do not allow managing services, rebooting and writing
-# to some locations in /etc. The role skips tasks that will typically fail in
-# Docker. With this parameter you can tell the role to -not- skip these tasks.
-storage_ignore_docker: yes
