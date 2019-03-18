@@ -13,14 +13,24 @@ This example is taken from `molecule/default/playbook.yml`:
 ---
 - name: Converge
   hosts: all
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - robertdebock.storage
+```
+
+The machine you are running this on, may need to be prepared. Tests have been done on machines prepared by this playbook:
+```yaml
+---
+- name: Prepare
+  hosts: all
   gather_facts: no
   become: yes
   serial: 30%
 
   roles:
     - role: robertdebock.bootstrap
-    - role: robertdebock.storage
-
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -75,15 +85,6 @@ storage_default_fstype: ext4
 #     boot: yes
 #     dump: 0
 #     passno: 2
-
-# To update packages this role places on the system, set `storage_package_state` to `latest`.
-storage_package_state: present
-
-# Some Docker containers do not allow managing services, rebooting and writing
-# to some locations in /etc. The role skips tasks that will typically fail in
-# Docker. With this parameter you can tell the role to -not- skip these tasks.
-storage_ignore_docker: yes
-
 ```
 
 Requirements
