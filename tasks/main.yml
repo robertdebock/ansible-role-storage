@@ -21,10 +21,6 @@
   when:
     - storage_partitions is defined
 
-- name: show shit
-  debug:
-    var: storage_volumegroups
-
 - name: include volumegroup
   include: volumegroup.yml
   with_items:
