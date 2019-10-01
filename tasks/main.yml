@@ -1,9 +1,5 @@
 ---
 # tasks file for storage
-- name: test veriables and environment
-  assert:
-    that:
-
 - name: install requirements
   package:
     name: "{{ storage_requirements }}"

@@ -1,7 +1,4 @@
 ---
 # vars file for storage
-_storage_requirements:
-  default:
-    - parted
-
-storage_requirements: "{{ _storage_requirements[ansible_distribution] | default(_storage_requirements['default']) }}"
+storage_requirements:
+  - parted
