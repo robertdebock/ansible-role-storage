@@ -8,6 +8,19 @@
   until: storage_install_requirements is succeeded
   retries: 3
 
+- name: find scsi busses
+  find:
+    path: /sys/class/scsi_host
+    patterns: 'host*'
+  register: storage_scsi_busses
+
+- name: scan scsi bus
+  lineinfile:
+    path: "{{ item.path }}"
+    line: "- - -"
+  loop: "{{ storage_scsi_busses.files }}"
+  changed_when: no
+
 - name: include partition
   include: partition.yml
   with_items:
