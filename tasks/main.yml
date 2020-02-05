@@ -23,8 +23,7 @@
 
 - name: include partition
   include: partition.yml
-  with_items:
-    - "{{ storage_partitions }}"
+  loop: "{{ storage_partitions }}"
   loop_control:
     loop_var: partition
   when:
@@ -32,8 +31,7 @@
 
 - name: include volumegroup
   include: volumegroup.yml
-  with_items:
-    - "{{ storage_volumegroups }}"
+  loop: "{{ storage_volumegroups }}"
   loop_control:
     loop_var: volumegroup
   when:
@@ -41,8 +39,7 @@
 
 - name: include volume
   include: volume.yml
-  with_items:
-    - "{{ storage_volumes }}"
+  loop: "{{ storage_volumes }}"
   loop_control:
     loop_var: volume
   when:
@@ -50,8 +47,7 @@
 
 - name: include filesystem
   include: filesystem.yml
-  with_items:
-    - "{{ storage_filesystems }}"
+  loop: "{{ storage_filesystems }}"
   loop_control:
     loop_var: filesystem
   when:
@@ -59,8 +55,7 @@
 
 - name: include mount
   include: mount.yml
-  with_items:
-    - "{{ storage_mounts }}"
+  loop: "{{ storage_mounts }}"
   loop_control:
     loop_var: mount
   when:

@@ -9,8 +9,7 @@
 
 - name: include mount
   include: mount.yml
-  with_items:
-    - "{{ storage_mounts }}"
+  loop: "{{ storage_mounts }}"
   loop_control:
     loop_var: mount
   when:
