@@ -1,0 +1,227 @@
+---
+- name: test if storage_default_fstype is set correctly
+  assert:
+    that:
+      - storage_default_fstype is defined
+      - storage_default_fstype | length > 0
+      - storage_default_fstype in ["btrfs", "cramfs", "ext2", "ext3", "ext4", "fat", "msdos", "ntfs", "vfat", "xfs"]
+
+- name: test if storage_partitions is set correctly
+  assert:
+    that:
+      - storage_partitions is iterable
+  when:
+    - storage_partitions is defined
+
+- name: test if storage_partitions.name is set correctly
+  assert:
+    that:
+      - item.name is defined
+      - item.name | length > 0
+  loop: "{{ storage_partitions }}"
+  when:
+    - storage_partitions is defined
+
+- name: test if storage_partitions.number is set correctly
+  assert:
+    that:
+      - item.number is defined
+      - item.number | int
+      - item.number | int > 0
+  loop: "{{ storage_partitions }}"
+  when:
+    - storage_partitions is defined
+
+- name: test if storage_partitions.part_end is set correctly
+  assert:
+    that:
+      - item.part_end is defined
+      - item.part_end | length > 0
+  loop: "{{ storage_partitions }}"
+  when:
+    - storage_partitions is defined
+
+- name: test if storage_volumegroups is set correctly
+  assert:
+    that:
+      - storage_volumegroups is iterable
+  when:
+    - storage_volumegroups is defined
+
+- name: test if storage_volumegroups.name is set correctly
+  assert:
+    that:
+      - item.name is defined
+      - item.name | length > 0
+  loop: "{{ storage_volumegroups }}"
+  when:
+    - storage_volumegroups is defined
+
+- name: test if storage_volumegroups.device is set correctly
+  assert:
+    that:
+      - item.device is defined
+      - item.device | length > 0
+  loop: "{{ storage_volumegroups }}"
+  when:
+    - storage_volumegroups is defined
+
+- name: test if storage_volumegroups.size is set correctly
+  assert:
+    that:
+      - item.size is defined
+      - item.size | int
+      - item.size | int > 0
+  loop: "{{ storage_volumegroups }}"
+  when:
+    - storage_volumegroups is defined
+
+- name: test if storage_volumes is set correctly
+  assert:
+    that:
+      - storage_volumes is iterable
+  when:
+    - storage_volumes is defined
+
+- name: test if storage_volumes.name is set correctly
+  assert:
+    that:
+      - item.name is defined
+      - item.name | length > 0
+  loop: "{{ storage_volumes }}"
+  when:
+    - storage_volumes is defined
+
+- name: test if storage_volumes.vg is set correctly
+  assert:
+    that:
+      - item.vg is defined
+      - item.vg | length > 0
+  loop: "{{ storage_volumes }}"
+  when:
+    - storage_volumes is defined
+
+- name: test if storage_volumes.size is set correctly
+  assert:
+    that:
+      - item.size is defined
+      - item.size | int
+      - item.size | int > 0
+  loop: "{{ storage_volumes }}"
+  when:
+    - storage_volumes is defined
+
+- name: test if storage_filesystems is set correctly
+  assert:
+    that:
+      - storage_filesystems is iterable
+  when:
+    - storage_filesystems is defined
+
+- name: test if storage_filesystems.name is set correctly
+  assert:
+    that:
+      - item.name is defined
+      - item.name | length > 0
+  loop: "{{ storage_filesystems }}"
+  when:
+    - storage_filesystems is defined
+
+- name: test if storage_filesystems.filesystem is set correctly
+  assert:
+    that:
+      - item.filesystem is defined
+      - item.filesystem | length > 0
+      - storage_default_fstype in ["btrfs", "cramfs", "ext2", "ext3", "ext4", "fat", "msdos", "ntfs", "vfat", "xfs"]
+  loop: "{{ storage_filesystems }}"
+  when:
+    - storage_filesystems is defined
+
+- name: test if storage_mounts is set correctly
+  assert:
+    that:
+      - storage_mounts is iterable
+  when:
+    - storage_mounts is defined
+
+- name: test if storage_mounts.name is set correctly
+  assert:
+    that:
+      - item.name is defined
+      - item.name | length > 0
+  loop: "{{ storage_mounts }}"
+  when:
+    - storage_mounts is defined
+
+- name: test if storage_mounts.src is set correctly
+  assert:
+    that:
+      - item.src is defined
+      - item.src | length > 0
+  loop: "{{ storage_mounts }}"
+  when:
+    - storage_mounts is defined
+
+- name: test if storage_mounts.owner is set correctly
+  assert:
+    that:
+      - item.owner is defined
+      - item.owner | length > 0
+  loop: "{{ storage_mounts }}"
+  when:
+    - storage_mounts is defined
+
+- name: test if storage_mounts.group is set correctly
+  assert:
+    that:
+      - item.group is defined
+      - item.group | length > 0
+  loop: "{{ storage_mounts }}"
+  when:
+    - storage_mounts is defined
+
+- name: test if storage_mounts.mode is set correctly
+  assert:
+    that:
+      - item.mode is defined
+      - item.mode | int
+      - item.mode | int > 0
+  loop: "{{ storage_mounts }}"
+  when:
+    - storage_mounts is defined
+
+- name: test if storage_mounts.opts is set correctly
+  assert:
+    that:
+      - item.opts is defined
+      - item.opts | length > 0
+  loop: "{{ storage_mounts }}"
+  when:
+    - storage_mounts is defined
+
+- name: test if storage_mounts.boot is set correctly
+  assert:
+    that:
+      - item.boot is defined
+      - item.boot | type_debug == "bool"
+  loop: "{{ storage_mounts }}"
+  when:
+    - storage_mounts is defined
+
+- name: test if storage_mounts.dump is set correctly
+  assert:
+    that:
+      - item.dump is defined
+      - item.dump in [0, 1]
+  loop: "{{ storage_mounts }}"
+  when:
+    - storage_mounts is defined
+
+- name: test if storage_mounts.passno is set correctly
+  assert:
+    that:
+      - item.passno is defined
+      - item.passno in [0, 1, 2]
+  loop: "{{ storage_mounts }}"
+  when:
+    - storage_mounts is defined
