@@ -18,6 +18,7 @@
     that:
       - item.name is defined
       - item.name | length > 0
+    quiet: yes
   loop: "{{ storage_partitions }}"
   when:
     - storage_partitions is defined
@@ -28,6 +29,7 @@
       - item.number is defined
       - item.number | int
       - item.number | int > 0
+    quiet: yes
   loop: "{{ storage_partitions }}"
   when:
     - storage_partitions is defined
@@ -37,6 +39,7 @@
     that:
       - item.part_end is defined
       - item.part_end | length > 0
+    quiet: yes
   loop: "{{ storage_partitions }}"
   when:
     - storage_partitions is defined
@@ -53,6 +56,7 @@
     that:
       - item.name is defined
       - item.name | length > 0
+    quiet: yes
   loop: "{{ storage_volumegroups }}"
   when:
     - storage_volumegroups is defined
@@ -62,6 +66,7 @@
     that:
       - item.device is defined
       - item.device | length > 0
+    quiet: yes
   loop: "{{ storage_volumegroups }}"
   when:
     - storage_volumegroups is defined
@@ -72,6 +77,7 @@
       - item.size is defined
       - item.size | int
       - item.size | int > 0
+    quiet: yes
   loop: "{{ storage_volumegroups }}"
   when:
     - storage_volumegroups is defined
@@ -88,6 +94,7 @@
     that:
       - item.name is defined
       - item.name | length > 0
+    quiet: yes
   loop: "{{ storage_volumes }}"
   when:
     - storage_volumes is defined
@@ -97,6 +104,7 @@
     that:
       - item.vg is defined
       - item.vg | length > 0
+    quiet: yes
   loop: "{{ storage_volumes }}"
   when:
     - storage_volumes is defined
@@ -107,6 +115,7 @@
       - item.size is defined
       - item.size | int
       - item.size | int > 0
+    quiet: yes
   loop: "{{ storage_volumes }}"
   when:
     - storage_volumes is defined
@@ -123,6 +132,7 @@
     that:
       - item.name is defined
       - item.name | length > 0
+    quiet: yes
   loop: "{{ storage_filesystems }}"
   when:
     - storage_filesystems is defined
@@ -133,6 +143,7 @@
       - item.filesystem is defined
       - item.filesystem | length > 0
       - storage_default_fstype in ["btrfs", "cramfs", "ext2", "ext3", "ext4", "fat", "msdos", "ntfs", "vfat", "xfs"]
+    quiet: yes
   loop: "{{ storage_filesystems }}"
   when:
     - storage_filesystems is defined
@@ -149,6 +160,7 @@
     that:
       - item.name is defined
       - item.name | length > 0
+    quiet: yes
   loop: "{{ storage_mounts }}"
   when:
     - storage_mounts is defined
@@ -158,6 +170,7 @@
     that:
       - item.src is defined
       - item.src | length > 0
+    quiet: yes
   loop: "{{ storage_mounts }}"
   when:
     - storage_mounts is defined
@@ -167,6 +180,7 @@
     that:
       - item.owner is defined
       - item.owner | length > 0
+    quiet: yes
   loop: "{{ storage_mounts }}"
   when:
     - storage_mounts is defined
@@ -176,6 +190,7 @@
     that:
       - item.group is defined
       - item.group | length > 0
+    quiet: yes
   loop: "{{ storage_mounts }}"
   when:
     - storage_mounts is defined
@@ -186,6 +201,7 @@
       - item.mode is defined
       - item.mode | int
       - item.mode | int > 0
+    quiet: yes
   loop: "{{ storage_mounts }}"
   when:
     - storage_mounts is defined
@@ -195,6 +211,7 @@
     that:
       - item.opts is defined
       - item.opts | length > 0
+    quiet: yes
   loop: "{{ storage_mounts }}"
   when:
     - storage_mounts is defined
@@ -204,6 +221,7 @@
     that:
       - item.boot is defined
       - item.boot | type_debug == "bool"
+    quiet: yes
   loop: "{{ storage_mounts }}"
   when:
     - storage_mounts is defined
@@ -213,6 +231,7 @@
     that:
       - item.dump is defined
       - item.dump in [0, 1]
+    quiet: yes
   loop: "{{ storage_mounts }}"
   when:
     - storage_mounts is defined
@@ -222,6 +241,7 @@
     that:
       - item.passno is defined
       - item.passno in [0, 1, 2]
+    quiet: yes
   loop: "{{ storage_mounts }}"
   when:
     - storage_mounts is defined
