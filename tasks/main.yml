@@ -7,9 +7,6 @@
   package:
     name: "{{ storage_requirements }}"
     state: present
-  register: storage_install_requirements
-  until: storage_install_requirements is succeeded
-  retries: 3
 
 - name: find scsi busses
   find:
