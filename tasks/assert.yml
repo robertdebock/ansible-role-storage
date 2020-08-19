@@ -5,11 +5,13 @@
       - storage_default_fstype is defined
       - storage_default_fstype | length > 0
       - storage_default_fstype in ["btrfs", "cramfs", "ext2", "ext3", "ext4", "fat", "msdos", "ntfs", "vfat", "xfs"]
+    quiet: yes
 
 - name: test if storage_partitions is set correctly
   assert:
     that:
       - storage_partitions is iterable
+    quiet: yes
   when:
     - storage_partitions is defined
 
@@ -54,6 +56,7 @@
   assert:
     that:
       - storage_volumegroups is iterable
+    quiet: yes
   when:
     - storage_volumegroups is defined
 
@@ -98,6 +101,7 @@
   assert:
     that:
       - storage_volumes is iterable
+    quiet: yes
   when:
     - storage_volumes is defined
 
@@ -142,6 +146,7 @@
   assert:
     that:
       - storage_filesystems is iterable
+    quiet: yes
   when:
     - storage_filesystems is defined
 
@@ -174,6 +179,7 @@
   assert:
     that:
       - storage_mounts is iterable
+    quiet: yes
   when:
     - storage_mounts is defined
 
