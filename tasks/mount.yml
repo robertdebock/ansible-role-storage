@@ -26,4 +26,3 @@
   notify:
     - reload systemd
     - refresh facts
-    - include mount
