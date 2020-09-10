@@ -6,10 +6,10 @@
       - volumegroup.device is defined
       - volumegroup.size is defined
       - volumegroup.size | int
-      - volumegroup.size >= 4
+    quiet: yes
 
 - name: create volume groups
   lvg:
     vg: "{{ volumegroup.name }}"
     pvs: "{{ volumegroup.device }}"
-    pesize: "{{ volumegroup.size / 4 }}"
+    pesize: "{{ volumegroup.size | default(omit) }}"

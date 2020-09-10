@@ -14,14 +14,14 @@ storage_default_fstype: ext4
 #     part_start: 4GiB
 #     part_end: 8GiB
 
-# Sizes in megabytes, minumum of 4.
+# The `size` is the physical extend size.
 # storage_volumegroups:
 #   - name: group1
 #     device: /dev/sdb2
-#     size: 128
+#     size: 8
 #   - name: group2
 #     device: /dev/sdb2
-#     size: 256
+#     size: 128M
 
 # Sizes in megabytes.
 # storage_volumes:
