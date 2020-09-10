@@ -6,6 +6,7 @@
       - partition.number is defined
       - partition.part_start is defined or
         partition.part_end is defined
+    quiet: yes
 
 - name: create partitions
   parted:

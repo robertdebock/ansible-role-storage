@@ -4,6 +4,7 @@
     that:
       - mount.name is defined
       - mount.src is defined
+    quiet: yes
 
 - name: create mountpoint
   file:

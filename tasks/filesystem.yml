@@ -3,6 +3,7 @@
   assert:
     that:
       - filesystem.name is defined
+    quiet: yes
 
 - name: create filesystems
   filesystem:
