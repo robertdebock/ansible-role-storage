@@ -33,13 +33,13 @@ The machine may need to be prepared using `molecule/resources/prepare.yml`:
     - role: robertdebock.bootstrap
 ```
 
-For verification `molecule/resources/verify.yml` run after the role has been applied.
+For verification `molecule/resources/verify.yml` runs after the role has been applied.
 ```yaml
 ---
 - name: Verify
   hosts: all
   become: yes
-  gather_facts: yes
+  gather_facts: no
 
   tasks:
     - name: check if connection still works
@@ -92,7 +92,7 @@ storage_default_fstype: ext4
 #     src: /dev/group1/var1
 #     owner: root
 #     group: root
-#     mode: 755
+#     mode: "0755"
 #     opts: defaults
 #     boot: yes
 #     dump: 0
