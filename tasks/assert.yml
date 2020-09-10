@@ -133,8 +133,6 @@
   assert:
     that:
       - item.size is defined
-      - item.size | int
-      - item.size | int > 0
     quiet: yes
   loop: "{{ storage_volumes }}"
   loop_control:
