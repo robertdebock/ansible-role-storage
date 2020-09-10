@@ -87,7 +87,6 @@
 - name: test if storage_volumegroups.size is set correctly
   assert:
     that:
-      - item.size is defined
       - item.size | int
       - item.size | int > 0
     quiet: yes
@@ -96,6 +95,7 @@
     label: "{{ item.name }}"
   when:
     - storage_volumegroups is defined
+    - item.size is defined
 
 - name: test if storage_volumes is set correctly
   assert:
