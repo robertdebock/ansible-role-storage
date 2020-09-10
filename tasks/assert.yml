@@ -263,6 +263,8 @@
       - item.boot | type_debug == "bool"
     quiet: yes
   loop: "{{ storage_mounts }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - storage_mounts is defined
 
