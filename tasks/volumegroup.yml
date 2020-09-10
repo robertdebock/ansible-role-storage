@@ -4,8 +4,6 @@
     that:
       - volumegroup.name is defined
       - volumegroup.device is defined
-      - volumegroup.size is defined
-      - volumegroup.size | int
     quiet: yes
 
 - name: create volume groups
