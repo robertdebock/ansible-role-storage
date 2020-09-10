@@ -72,11 +72,12 @@
   when:
     - storage_volumegroups is defined
 
-- name: test if storage_volumegroups.device is set correctly
+- name: test if storage_volumegroups.devices is set correctly
   assert:
     that:
-      - item.device is defined
-      - item.device | length > 0
+      - item.devices is defined
+      - item.devices | length > 0
+      - item.devices is iterable
     quiet: yes
   loop: "{{ storage_volumegroups }}"
   loop_control:
