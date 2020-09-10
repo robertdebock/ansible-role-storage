@@ -3,3 +3,4 @@
 
 storage_requirements:
   - parted
+  - lvm2
