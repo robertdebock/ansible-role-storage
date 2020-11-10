@@ -4,7 +4,7 @@
     that:
       - storage_default_fstype is defined
       - storage_default_fstype | length > 0
-      - storage_default_fstype in ["btrfs", "cramfs", "ext2", "ext3", "ext4", "fat", "msdos", "ntfs", "vfat", "xfs"]
+      - storage_default_fstype in [ "btrfs", "cramfs", "ext2", "ext3", "ext4", "fat", "msdos", "ntfs", "vfat", "xfs" ]
     quiet: yes
 
 - name: test if storage_partitions is set correctly
@@ -166,7 +166,7 @@
     that:
       - item.filesystem is defined
       - item.filesystem | length > 0
-      - storage_default_fstype in ["btrfs", "cramfs", "ext2", "ext3", "ext4", "fat", "msdos", "ntfs", "vfat", "xfs"]
+      - storage_default_fstype in [ "btrfs", "cramfs", "ext2", "ext3", "ext4", "fat", "msdos", "ntfs", "vfat", "xfs" ]
     quiet: yes
   loop: "{{ storage_filesystems }}"
   loop_control:
