@@ -31,7 +31,7 @@
   assert:
     that:
       - item.number is defined
-      - item.number | int
+      - item.number is number
       - item.number | int > 0
     quiet: yes
   loop: "{{ storage_partitions }}"
@@ -88,7 +88,7 @@
 - name: test if storage_volumegroups.size is set correctly
   assert:
     that:
-      - item.size | int
+      - item.size is number
       - item.size | int > 0
     quiet: yes
   loop: "{{ storage_volumegroups }}"
@@ -234,7 +234,7 @@
   assert:
     that:
       - item.mode is defined
-      - item.mode | int
+      - item.mode is number
       - item.mode | int > 0
     quiet: yes
   loop: "{{ storage_mounts }}"
