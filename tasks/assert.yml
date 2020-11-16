@@ -259,7 +259,7 @@
   assert:
     that:
       - item.boot is defined
-      - item.boot | type_debug == "bool"
+      - item.boot is boolean
     quiet: yes
   loop: "{{ storage_mounts }}"
   loop_control:
