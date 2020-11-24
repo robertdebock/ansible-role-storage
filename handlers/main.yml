@@ -1,5 +1,6 @@
 ---
 # handlers file for storage
+
 - name: reload systemd
   systemd:
     daemon_reload: yes
