@@ -1,4 +1,5 @@
 ---
+
 - name: test if storage_default_fstype is set correctly
   assert:
     that:
