@@ -4,6 +4,7 @@
   assert:
     that:
       - storage_default_fstype is defined
+      - storage_default_fstype is string
       - storage_default_fstype in [ "btrfs", "cramfs", "ext2", "ext3", "ext4", "fat", "msdos", "ntfs", "vfat", "xfs" ]
     quiet: yes
 
@@ -19,6 +20,7 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
     quiet: yes
   loop: "{{ storage_partitions }}"
   loop_control:
@@ -43,6 +45,7 @@
   assert:
     that:
       - item.part_end is defined
+      - item.part_end is string
     quiet: yes
   loop: "{{ storage_partitions }}"
   loop_control:
@@ -62,6 +65,7 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
     quiet: yes
   loop: "{{ storage_volumegroups }}"
   loop_control:
@@ -106,6 +110,7 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
     quiet: yes
   loop: "{{ storage_volumes }}"
   loop_control:
@@ -117,6 +122,7 @@
   assert:
     that:
       - item.vg is defined
+      - item.vg is string
     quiet: yes
   loop: "{{ storage_volumes }}"
   loop_control:
@@ -128,6 +134,7 @@
   assert:
     that:
       - item.size is defined
+      - item.size is number
     quiet: yes
   loop: "{{ storage_volumes }}"
   loop_control:
@@ -147,6 +154,7 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
     quiet: yes
   loop: "{{ storage_filesystems }}"
   loop_control:
@@ -158,6 +166,7 @@
   assert:
     that:
       - item.filesystem is defined
+      - item.filesystem is string
       - storage_default_fstype in [ "btrfs", "cramfs", "ext2", "ext3", "ext4", "fat", "msdos", "ntfs", "vfat", "xfs" ]
     quiet: yes
   loop: "{{ storage_filesystems }}"
@@ -178,6 +187,7 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
     quiet: yes
   loop: "{{ storage_mounts }}"
   loop_control:
@@ -189,6 +199,7 @@
   assert:
     that:
       - item.src is defined
+      - item.src is string
     quiet: yes
   loop: "{{ storage_mounts }}"
   loop_control:
@@ -200,6 +211,7 @@
   assert:
     that:
       - item.owner is defined
+      - item.owner is string
     quiet: yes
   loop: "{{ storage_mounts }}"
   loop_control:
@@ -211,6 +223,7 @@
   assert:
     that:
       - item.group is defined
+      - item.group is string
     quiet: yes
   loop: "{{ storage_mounts }}"
   loop_control:
@@ -235,6 +248,7 @@
   assert:
     that:
       - item.opts is defined
+      - item.opts is string
     quiet: yes
   loop: "{{ storage_mounts }}"
   loop_control:
@@ -258,6 +272,7 @@
   assert:
     that:
       - item.dump is defined
+      - item.dump is boolean
       - item.dump in [0, 1]
     quiet: yes
   loop: "{{ storage_mounts }}"
@@ -270,6 +285,7 @@
   assert:
     that:
       - item.passno is defined
+      - item.passno is number
       - item.passno in [0, 1, 2]
     quiet: yes
   loop: "{{ storage_mounts }}"
