@@ -2,9 +2,9 @@
 
 Create partitions, volume groups, volumes, filesystems and mounts
 
-|Travis|GitHub|Quality|Downloads|Version|
-|------|------|-------|---------|-------|
-|[![travis](https://travis-ci.com/robertdebock/ansible-role-storage.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-storage)|[![github](https://github.com/robertdebock/ansible-role-storage/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-storage/actions)|[![quality](https://img.shields.io/ansible/quality/38205)](https://galaxy.ansible.com/robertdebock/storage)|[![downloads](https://img.shields.io/ansible/role/d/38205)](https://galaxy.ansible.com/robertdebock/storage)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-storage.svg)](https://github.com/robertdebock/ansible-role-storage/releases/)|
+|Travis|GitHub|GitLab|Quality|Downloads|Version|
+|------|------|------|-------|---------|-------|
+|[![travis](https://travis-ci.com/robertdebock/ansible-role-storage.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-storage)|[![github](https://github.com/robertdebock/ansible-role-storage/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-storage/actions)|[![gitlab](https://gitlab.com/robertdebock/ansible-role-storage/badges/master/pipeline.svg)](https://gitlab.com/robertdebock/ansible-role-storage)|[![quality](https://img.shields.io/ansible/quality/38205)](https://galaxy.ansible.com/robertdebock/storage)|[![downloads](https://img.shields.io/ansible/role/d/38205)](https://galaxy.ansible.com/robertdebock/storage)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-storage.svg)](https://github.com/robertdebock/ansible-role-storage/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -90,10 +90,11 @@ storage_default_fstype: ext4
 
 ## [Requirements](#requirements)
 
-- Access to a repository containing packages, likely on the internet.
-- A recent version of Ansible. (Tests run on the current, previous and next release of Ansible.)
+- pip packages listed in [requirements.txt](https://github.com/robertdebock/ansible-role-storage/blob/master/requirements.txt).
 
 ## [Status of requirements](#status-of-requirements)
+
+The following roles are used to prepare a system. You may choose to prepare your system in another way, I have tested these roles as well.
 
 | Requirement | Travis | GitHub |
 |-------------|--------|--------|
