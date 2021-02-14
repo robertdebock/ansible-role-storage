@@ -1,7 +1,7 @@
 ---
 
 - name: test if storage_default_fstype is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - storage_default_fstype is defined
       - storage_default_fstype is string
@@ -9,7 +9,7 @@
     quiet: yes
 
 - name: test if storage_partitions is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - storage_partitions is iterable
     quiet: yes
@@ -17,7 +17,7 @@
     - storage_partitions is defined
 
 - name: test if storage_partitions.name is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.name is defined
       - item.name is string
@@ -29,7 +29,7 @@
     - storage_partitions is defined
 
 - name: test if storage_partitions.number is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.number is defined
       - item.number is number
@@ -42,7 +42,7 @@
     - storage_partitions is defined
 
 - name: test if storage_partitions.part_end is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.part_end is defined
       - item.part_end is string
@@ -54,7 +54,7 @@
     - storage_partitions is defined
 
 - name: test if storage_volumegroups is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - storage_volumegroups is iterable
     quiet: yes
@@ -62,7 +62,7 @@
     - storage_volumegroups is defined
 
 - name: test if storage_volumegroups.name is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.name is defined
       - item.name is string
@@ -74,7 +74,7 @@
     - storage_volumegroups is defined
 
 - name: test if storage_volumegroups.devices is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.devices is defined
       - item.devices is iterable
@@ -86,7 +86,7 @@
     - storage_volumegroups is defined
 
 - name: test if storage_volumegroups.size is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.size is number
       - item.size > 0
@@ -99,7 +99,7 @@
     - item.size is defined
 
 - name: test if storage_volumes is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - storage_volumes is iterable
     quiet: yes
@@ -107,7 +107,7 @@
     - storage_volumes is defined
 
 - name: test if storage_volumes.name is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.name is defined
       - item.name is string
@@ -119,7 +119,7 @@
     - storage_volumes is defined
 
 - name: test if storage_volumes.vg is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.vg is defined
       - item.vg is string
@@ -131,7 +131,7 @@
     - storage_volumes is defined
 
 - name: test if storage_volumes.size is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.size is defined
       - item.size is number
@@ -143,7 +143,7 @@
     - storage_volumes is defined
 
 - name: test if storage_filesystems is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - storage_filesystems is iterable
     quiet: yes
@@ -151,7 +151,7 @@
     - storage_filesystems is defined
 
 - name: test if storage_filesystems.name is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.name is defined
       - item.name is string
@@ -163,7 +163,7 @@
     - storage_filesystems is defined
 
 - name: test if storage_filesystems.filesystem is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.filesystem is defined
       - item.filesystem is string
@@ -176,7 +176,7 @@
     - storage_filesystems is defined
 
 - name: test if storage_mounts is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - storage_mounts is iterable
     quiet: yes
@@ -184,7 +184,7 @@
     - storage_mounts is defined
 
 - name: test if storage_mounts.name is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.name is defined
       - item.name is string
@@ -196,7 +196,7 @@
     - storage_mounts is defined
 
 - name: test if storage_mounts.src is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.src is defined
       - item.src is string
@@ -208,7 +208,7 @@
     - storage_mounts is defined
 
 - name: test if storage_mounts.owner is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.owner is defined
       - item.owner is string
@@ -220,7 +220,7 @@
     - storage_mounts is defined
 
 - name: test if storage_mounts.group is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.group is defined
       - item.group is string
@@ -232,7 +232,7 @@
     - storage_mounts is defined
 
 - name: test if storage_mounts.mode is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.mode is defined
       - item.mode is number
@@ -245,7 +245,7 @@
     - storage_mounts is defined
 
 - name: test if storage_mounts.opts is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.opts is defined
       - item.opts is string
@@ -257,7 +257,7 @@
     - storage_mounts is defined
 
 - name: test if storage_mounts.boot is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.boot is defined
       - item.boot is boolean
@@ -269,7 +269,7 @@
     - storage_mounts is defined
 
 - name: test if storage_mounts.dump is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.dump is defined
       - item.dump is boolean
@@ -282,7 +282,7 @@
     - storage_mounts is defined
 
 - name: test if storage_mounts.passno is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.passno is defined
       - item.passno is number
