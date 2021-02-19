@@ -1,6 +1,6 @@
 ---
 - name: test volume
-  assert:
+  ansible.builtin.assert:
     that:
       - volume.name is defined
       - volume.vg is defined

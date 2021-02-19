@@ -7,18 +7,18 @@
   delegate_to: localhost
 
 - name: install requirements
-  package:
+  ansible.builtin.package:
     name: "{{ storage_requirements }}"
     state: present
 
 - name: find scsi busses
-  find:
+  ansible.builtin.find:
     path: /sys/class/scsi_host
     patterns: 'host*'
   register: storage_scsi_busses
 
 - name: scan scsi bus
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: "{{ item.path }}"
     line: "- - -"
     mode: "0444"
@@ -26,7 +26,7 @@
   changed_when: no
 
 - name: include partition
-  include: partition.yml
+  ansible.builtin.include: partition.yml
   loop: "{{ storage_partitions }}"
   loop_control:
     loop_var: partition
@@ -34,7 +34,7 @@
     - storage_partitions is defined
 
 - name: include volumegroup
-  include: volumegroup.yml
+  ansible.builtin.include: volumegroup.yml
   loop: "{{ storage_volumegroups }}"
   loop_control:
     loop_var: volumegroup
@@ -42,7 +42,7 @@
     - storage_volumegroups is defined
 
 - name: include volume
-  include: volume.yml
+  ansible.builtin.include: volume.yml
   loop: "{{ storage_volumes }}"
   loop_control:
     loop_var: volume
@@ -50,7 +50,7 @@
     - storage_volumes is defined
 
 - name: include filesystem
-  include: filesystem.yml
+  ansible.builtin.include: filesystem.yml
   loop: "{{ storage_filesystems }}"
   loop_control:
     loop_var: filesystem
@@ -58,7 +58,7 @@
     - storage_filesystems is defined
 
 - name: include mount
-  include: mount.yml
+  ansible.builtin.include: mount.yml
   loop: "{{ storage_mounts }}"
   loop_control:
     loop_var: mount

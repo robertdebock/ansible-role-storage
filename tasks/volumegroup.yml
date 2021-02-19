@@ -1,6 +1,6 @@
 ---
 - name: test volumegroup
-  assert:
+  ansible.builtin.assert:
     that:
       - volumegroup.name is defined
       - volumegroup.devices is defined

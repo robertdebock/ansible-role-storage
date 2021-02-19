@@ -1,6 +1,6 @@
 ---
 - name: test storage_partitions
-  assert:
+  ansible.builtin.assert:
     that:
       - partition.name is defined
       - partition.number is defined
