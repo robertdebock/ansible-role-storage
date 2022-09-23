@@ -40,7 +40,7 @@ storage_default_fstype: ext4
 #     src: /dev/group1/var1
 #     owner: root
 #     group: root
-#     mode: "0755"
+#     mode: 0755
 #     opts: defaults
 #     boot: yes
 #     dump: 0
