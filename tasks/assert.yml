@@ -21,6 +21,7 @@
     that:
       - item.name is defined
       - item.name is string
+      - item.name is not none
     quiet: yes
   loop: "{{ storage_partitions }}"
   loop_control:
@@ -46,6 +47,7 @@
     that:
       - item.part_end is defined
       - item.part_end is string
+      - item.part_end is not none
     quiet: yes
   loop: "{{ storage_partitions }}"
   loop_control:
@@ -66,6 +68,7 @@
     that:
       - item.name is defined
       - item.name is string
+      - item.name is not none
     quiet: yes
   loop: "{{ storage_volumegroups }}"
   loop_control:
@@ -111,6 +114,7 @@
     that:
       - item.name is defined
       - item.name is string
+      - item.name is not none
     quiet: yes
   loop: "{{ storage_volumes }}"
   loop_control:
@@ -123,6 +127,7 @@
     that:
       - item.vg is defined
       - item.vg is string
+      - item.vg is not none
     quiet: yes
   loop: "{{ storage_volumes }}"
   loop_control:
@@ -155,6 +160,7 @@
     that:
       - item.name is defined
       - item.name is string
+      - item.name is not none
     quiet: yes
   loop: "{{ storage_filesystems }}"
   loop_control:
@@ -188,6 +194,7 @@
     that:
       - item.name is defined
       - item.name is string
+      - item.name is not none
     quiet: yes
   loop: "{{ storage_mounts }}"
   loop_control:
@@ -200,6 +207,7 @@
     that:
       - item.src is defined
       - item.src is string
+      - item.src is not none
     quiet: yes
   loop: "{{ storage_mounts }}"
   loop_control:
@@ -212,6 +220,7 @@
     that:
       - item.owner is defined
       - item.owner is string
+      - item.owner is not none
     quiet: yes
   loop: "{{ storage_mounts }}"
   loop_control:
@@ -224,6 +233,7 @@
     that:
       - item.group is defined
       - item.group is string
+      - item.group is not none
     quiet: yes
   loop: "{{ storage_mounts }}"
   loop_control:
@@ -236,6 +246,7 @@
     that:
       - item.mode is defined
       - item.mode is string
+      - item.mode is not none
     quiet: yes
   loop: "{{ storage_mounts }}"
   loop_control:
@@ -248,6 +259,7 @@
     that:
       - item.opts is defined
       - item.opts is string
+      - item.opts is not none
     quiet: yes
   loop: "{{ storage_mounts }}"
   loop_control:
