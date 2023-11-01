@@ -70,7 +70,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
   roles:
     - role: robertdebock.bootstrap
 
-  pre_tasks:
+  tasks:
     # These are "cleanup" tasks, to make sure the test is run in a non-biased environment.
     - name: Unmount /mnt/test
       ansible.posix.mount:
@@ -93,7 +93,6 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
         cmd: losetup -D
       changed_when: yes
 
-  tasks:
     # Since we're in a container, let's create a file.
     # Normally you would not require this, as `/dev/sd*` (or so) would be used.
     - name: Create a 4GB file
