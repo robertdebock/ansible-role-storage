@@ -10,3 +10,4 @@
 
 - name: Run vgscan --mknodes
   ansible.builtin.command: vgscan --mknodes
+  changed_when: yes
