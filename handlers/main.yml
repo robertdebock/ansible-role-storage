@@ -7,3 +7,6 @@
 
 - name: Refresh facts
   ansible.builtin.setup:
+
+- name: Run vgscan --mknodes
+  ansible.builtin.command: vgscan --mknodes

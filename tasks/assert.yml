@@ -92,7 +92,6 @@
   ansible.builtin.assert:
     that:
       - item.size is number
-      - item.size > 0
     quiet: yes
   loop: "{{ storage_volumegroups }}"
   loop_control:
@@ -139,7 +138,6 @@
   ansible.builtin.assert:
     that:
       - item.size is defined
-      - item.size is number
     quiet: yes
   loop: "{{ storage_volumes }}"
   loop_control:
@@ -257,7 +255,6 @@
 - name: assert | Test storage_mounts.opts
   ansible.builtin.assert:
     that:
-      - item.opts is defined
       - item.opts is string
       - item.opts is not none
     quiet: yes
@@ -266,11 +263,11 @@
     label: "{{ item.name }}"
   when:
     - storage_mounts is defined
+    - item.opts is defined
 
 - name: assert | Test storage_mounts.boot
   ansible.builtin.assert:
     that:
-      - item.boot is defined
       - item.boot is boolean
     quiet: yes
   loop: "{{ storage_mounts }}"
@@ -278,11 +275,11 @@
     label: "{{ item.name }}"
   when:
     - storage_mounts is defined
+    - item.boot is defined
 
 - name: assert | Test storage_mounts.dump
   ansible.builtin.assert:
     that:
-      - item.dump is defined
       - item.dump is number
       - item.dump in [0, 1]
     quiet: yes
@@ -291,11 +288,11 @@
     label: "{{ item.name }}"
   when:
     - storage_mounts is defined
+    - item.dump is defined
 
 - name: assert | Test storage_mounts.passno
   ansible.builtin.assert:
     that:
-      - item.passno is defined
       - item.passno is number
       - item.passno in [0, 1, 2]
     quiet: yes
@@ -304,3 +301,4 @@
     label: "{{ item.name }}"
   when:
     - storage_mounts is defined
+    - item.passno is defined

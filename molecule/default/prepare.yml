@@ -7,3 +7,55 @@
 
   roles:
     - role: robertdebock.bootstrap
+
+  pre_tasks:
+    # These are "cleanup" tasks, to make sure the test is run in a non-biased environment.
+    - name: Unmount /mnt/test
+      ansible.posix.mount:
+        path: /mnt/test
+        state: absent
+
+    - name: Install lvm2
+      ansible.builtin.package:
+        name: lvm2
+
+    - name: Remove lv
+      community.general.lvol:
+        vg: data
+        lv: test1
+        state: absent
+        force: yes
+
+    - name: Remove loop_device
+      ansible.builtin.command:
+        cmd: losetup -D
+      changed_when: yes
+
+  tasks:
+    # Since we're in a container, let's create a file.
+    # Normally you would not require this, as `/dev/sd*` (or so) would be used.
+    - name: Create a 4GB file
+      community.general.filesize:
+        path: /blockdevice.img
+        size: 4G
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Find first unused loop device
+      ansible.builtin.command: losetup --find
+      register: loop_device
+      changed_when: false
+
+    - name: Store loop device on disk
+      ansible.builtin.copy:
+        content: "{{ loop_device.stdout }}"
+        dest: /loopback-devicename.txt
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Create loop device
+      ansible.builtin.command:
+        cmd: losetup {{ loop_device.stdout }} /blockdevice.img
+      changed_when: yes
