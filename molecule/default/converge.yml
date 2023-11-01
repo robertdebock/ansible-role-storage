@@ -34,11 +34,11 @@
       storage_filesystems:
         - name: /dev/data/test1
           filesystem: xfs
-    # This causes an issue with the loopback device.
-    # storage_mounts:
-    #   - name: /mnt/test
-    #     src: /dev/data/test1
-    #     fstype: xfs
-    #     owner: root
-    #     group: root
-    #     mode: "0755"
+      # This causes an issue with the loopback device.
+      # storage_mounts:
+      #   - name: /mnt/test
+      #     src: /dev/data/test1
+      #     fstype: xfs
+      #     owner: root
+      #     group: root
+      #     mode: "0755"
