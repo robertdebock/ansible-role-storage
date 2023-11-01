@@ -26,7 +26,7 @@
     passno: "{{ mount.passno | default(omit) }}"
     state: present
 
-- name: Reload systemd
+- name: mount | Reload systemd
   ansible.builtin.command:
     cmd: systemctl daemon-reload
   changed_when: no
