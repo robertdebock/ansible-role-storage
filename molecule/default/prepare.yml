@@ -45,7 +45,7 @@
 
         - name: Remove loop device
           ansible.builtin.command:
-            cmd: "losetup -d {{ item | split(':')[0] }}"
+            cmd: 'losetup -d {{ item | split(":")[0] }}'
           changed_when: yes
           loop: "{{ loop_devices.stdout_lines }}"
 
