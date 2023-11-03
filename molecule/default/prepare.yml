@@ -30,6 +30,24 @@
       ansible.builtin.command:
         cmd: losetup -D
       changed_when: yes
+      when:
+        - ansible_distribution != "Alpine"
+
+    - name: Remove loop_device on Alpine
+      when:
+        - ansible_distribution == "Alpine"
+      block:
+        - name: Find loop devics
+          ansible.builtin.command:
+            cmd: losetup -a
+          register: loop_devices
+          changed_when: no
+
+        - name: Remove loop device
+          ansible.builtin.command:
+            cmd: "losetup -d {{ item | split(':')[0] }}"
+          changed_when: yes
+          loop: "{{ loop_devices.stdout_lines }}"
 
     # Since we're in a container, let's create a file.
     # Normally you would not require this, as `/dev/sd*` (or so) would be used.
@@ -42,9 +60,10 @@
         mode: "0644"
 
     - name: Find first unused loop device
-      ansible.builtin.command: losetup --find
+      ansible.builtin.command:
+        cmd losetup -f
       register: loop_device
-      changed_when: false
+      changed_when: no
 
     - name: Store loop device on disk
       ansible.builtin.copy:

@@ -2,9 +2,9 @@
 
 Create partitions, volume groups, volumes, filesystems and mounts
 
-|GitHub|GitLab|Quality|Downloads|Version|
-|------|------|-------|---------|-------|
-|[![github](https://github.com/robertdebock/ansible-role-storage/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-storage/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-storage/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-storage)|[![quality](https://img.shields.io/ansible/quality/24594)](https://galaxy.ansible.com/robertdebock/storage)|[![downloads](https://img.shields.io/ansible/role/d/24594)](https://galaxy.ansible.com/robertdebock/storage)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-storage.svg)](https://github.com/robertdebock/ansible-role-storage/releases/)|
+|GitHub|GitLab|Downloads|Version|
+|------|------|---------|-------|
+|[![github](https://github.com/robertdebock/ansible-role-storage/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-storage/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-storage/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-storage)|[![downloads](https://img.shields.io/ansible/role/d/24594)](https://galaxy.ansible.com/robertdebock/storage)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-storage.svg)](https://github.com/robertdebock/ansible-role-storage/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -47,14 +47,14 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       storage_filesystems:
         - name: /dev/data/test1
           filesystem: xfs
-      # This causes an issue with the loopback device.
-      # storage_mounts:
-      #   - name: /mnt/test
-      #     src: /dev/data/test1
-      #     fstype: xfs
-      #     owner: root
-      #     group: root
-      #     mode: "0755"
+# This causes an issue with the loopback device.
+#       storage_mounts:
+#         - name: /mnt/test
+#           src: /dev/data/test1
+#           fstype: xfs
+#           owner: root
+#           group: root
+#           mode: "0755"
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/robertdebock/ansible-role-storage/blob/master/molecule/default/prepare.yml):
@@ -92,6 +92,24 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
       ansible.builtin.command:
         cmd: losetup -D
       changed_when: yes
+      when:
+        - ansible_distribution != "Alpine"
+
+    - name: Remove loop_device on Alpine
+      when:
+        - ansible_distribution == "Alpine"
+      block:
+        - name: Find loop devics
+          ansible.builtin.command:
+            cmd: losetup -a
+          register: loop_devices
+          changed_when: no
+
+        - name: Remove loop device
+          ansible.builtin.command:
+            cmd: "losetup -d {{ item | split(':')[0] }}"
+          changed_when: yes
+          loop: "{{ loop_devices.stdout_lines }}"
 
     # Since we're in a container, let's create a file.
     # Normally you would not require this, as `/dev/sd*` (or so) would be used.
@@ -104,9 +122,10 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
         mode: "0644"
 
     - name: Find first unused loop device
-      ansible.builtin.command: losetup --find
+      ansible.builtin.command:
+        cmd losetup -f
       register: loop_device
-      changed_when: false
+      changed_when: no
 
     - name: Store loop device on disk
       ansible.builtin.copy:
