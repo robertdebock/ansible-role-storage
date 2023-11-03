@@ -26,7 +26,7 @@
         state: absent
         force: yes
 
-    - name: Remove loop_device
+    - name: Remove all loop devices
       ansible.builtin.command:
         cmd: losetup -D
       changed_when: yes
@@ -37,7 +37,7 @@
       when:
         - ansible_distribution == "Alpine"
       block:
-        - name: Find loop devics
+        - name: Find loop devices
           ansible.builtin.command:
             cmd: losetup -a
           register: loop_devices
@@ -45,7 +45,7 @@
 
         - name: Remove loop device
           ansible.builtin.command:
-            cmd: 'losetup -d {{ item | split(":")[0] }}'
+            cmd: "losetup -d {{ item | split(':') | first }}"
           changed_when: yes
           loop: "{{ loop_devices.stdout_lines }}"
 
@@ -61,7 +61,7 @@
 
     - name: Find first unused loop device
       ansible.builtin.command:
-        cmd losetup -f
+        cmd: losetup -f
       register: loop_device
       changed_when: no
 
