@@ -88,6 +88,18 @@
   when:
     - storage_volumegroups is defined
 
+- name: assert | Test storage_volumegroups.size
+  ansible.builtin.assert:
+    that:
+      - item.size is number
+    quiet: yes
+  loop: "{{ storage_volumegroups }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - storage_volumegroups is defined
+    - item.size is defined
+
 - name: assert | Test storage_volumes
   ansible.builtin.assert:
     that:
