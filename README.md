@@ -65,7 +65,6 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
   hosts: all
   become: yes
   gather_facts: no
-  serial: 30%
 
   roles:
     - role: robertdebock.bootstrap
@@ -88,7 +87,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
         state: absent
         force: yes
 
-    - name: Remove loop_device
+    - name: Remove all loop devices
       ansible.builtin.command:
         cmd: losetup -D
       changed_when: yes
@@ -99,7 +98,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
       when:
         - ansible_distribution == "Alpine"
       block:
-        - name: Find loop devics
+        - name: Find loop devices
           ansible.builtin.command:
             cmd: losetup -a
           register: loop_devices
@@ -107,7 +106,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 
         - name: Remove loop device
           ansible.builtin.command:
-            cmd: "losetup -d {{ item | split(':')[0] }}"
+            cmd: "losetup -d {{ item | split(':') | first }}"
           changed_when: yes
           loop: "{{ loop_devices.stdout_lines }}"
 
@@ -123,7 +122,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 
     - name: Find first unused loop device
       ansible.builtin.command:
-        cmd losetup -f
+        cmd: losetup -f
       register: loop_device
       changed_when: no
 
