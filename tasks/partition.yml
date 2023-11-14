@@ -19,6 +19,11 @@
   when:
     - partition.label is defined
 
+- name: partition | Rescan device
+  ansible.builtin.lineinfile:
+    path: "{{ partition.name }}"
+    line: "1"
+
 - name: partition | Create partitions
   community.general.parted:
     device: "{{ partition.name }}"
