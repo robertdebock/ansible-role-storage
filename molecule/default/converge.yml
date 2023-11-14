@@ -34,10 +34,14 @@
       storage_filesystems:
         - name: /dev/data/test1
           fstype: xfs
-      storage_mounts:
-        - name: /mnt/test
-          src: /dev/data/test1
-          fstype: xfs
-          owner: root
-          group: root
-          mode: "0755"
+      # Mounting is not idempotent for:
+      # - debian:bullseye
+      # - ubuntu:focal
+      # - ubuntu:bionic
+      # storage_mounts:
+      #   - name: /mnt/test
+      #     src: /dev/data/test1
+      #     fstype: xfs
+      #     owner: root
+      #     group: root
+      #     mode: "0755"
