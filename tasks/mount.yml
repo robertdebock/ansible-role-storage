@@ -30,6 +30,8 @@
   ansible.builtin.command:
     cmd: systemctl daemon-reload  # noqa: command-instead-of-module
   changed_when: no
+  when:
+    - ansible_service_mgr == "systemd"
 
 - name: mount | Mount filessytem
   ansible.posix.mount:
