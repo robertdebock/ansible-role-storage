@@ -47,14 +47,17 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       storage_filesystems:
         - name: /dev/data/test1
           fstype: xfs
-# This causes an issue with the loopback device.
-#       storage_mounts:
-#         - name: /mnt/test
-#           src: /dev/data/test1
-#           fstype: xfs
-#           owner: root
-#           group: root
-#           mode: "0755"
+      # Mounting is not idempotent for:
+      # - debian:bullseye
+      # - ubuntu:focal
+      # - ubuntu:bionic
+      # storage_mounts:
+      #   - name: /mnt/test
+      #     src: /dev/data/test1
+      #     fstype: xfs
+      #     owner: root
+      #     group: root
+      #     mode: "0755"
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/robertdebock/ansible-role-storage/blob/master/molecule/default/prepare.yml):
