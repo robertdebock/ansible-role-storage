@@ -1,4 +1,4 @@
-# Ansible role [storage](#storage)
+# [Ansible role storage](#storage)
 
 Create partitions, volume groups, volumes, filesystems and mounts
 
