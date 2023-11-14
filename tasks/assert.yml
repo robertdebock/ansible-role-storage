@@ -172,6 +172,12 @@
       - item.filesystem is defined
       - item.filesystem is string
       - storage_default_fstype in [ "btrfs", "cramfs", "ext2", "ext3", "ext4", "fat", "msdos", "ntfs", "vfat", "xfs" ]
+
+- name: assert | Test storage_filesystems.fstype
+  ansible.builtin.assert:
+    that:
+      - item.fstype is defined
+      - item.fstype is string
     quiet: yes
   loop: "{{ storage_filesystems }}"
   loop_control:

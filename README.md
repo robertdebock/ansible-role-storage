@@ -46,7 +46,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
           opts: --zero n
       storage_filesystems:
         - name: /dev/data/test1
-          filesystem: xfs
+          fstype: xfs
 # This causes an issue with the loopback device.
 #       storage_mounts:
 #         - name: /mnt/test
