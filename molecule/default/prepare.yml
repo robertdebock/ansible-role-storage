@@ -1,8 +1,8 @@
 ---
 - name: Prepare
   hosts: all
-  become: yes
-  gather_facts: no
+  become: true
+  gather_facts: false
 
   roles:
     - role: robertdebock.bootstrap
@@ -23,12 +23,12 @@
         vg: data
         lv: test1
         state: absent
-        force: yes
+        force: true
 
     - name: Remove all loop devices
       ansible.builtin.command:
         cmd: losetup -D
-      changed_when: yes
+      changed_when: true
       when:
         - ansible_distribution != "Alpine"
 
@@ -40,12 +40,12 @@
           ansible.builtin.command:
             cmd: losetup -a
           register: loop_devices
-          changed_when: no
+          changed_when: false
 
         - name: Remove loop device
           ansible.builtin.command:
             cmd: "losetup -d {{ item | split(':') | first }}"
-          changed_when: yes
+          changed_when: true
           loop: "{{ loop_devices.stdout_lines }}"
 
     # Since we're in a container, let's create a file.
@@ -62,7 +62,7 @@
       ansible.builtin.command:
         cmd: losetup -f
       register: loop_device
-      changed_when: no
+      changed_when: false
 
     - name: Store loop device on disk
       ansible.builtin.copy:
@@ -75,4 +75,4 @@
     - name: Create loop device
       ansible.builtin.command:
         cmd: losetup {{ loop_device.stdout }} /blockdevice.img
-      changed_when: yes
+      changed_when: true
