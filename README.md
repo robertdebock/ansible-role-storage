@@ -27,7 +27,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       register: loopback_devicename
 
   roles:
-    - role: ansible-role-storage
+    - role: robertdebock.storage
       # Partitioning a loopback device is not supported by parted.
       # storage_partitions:
       #   - name: "{{ loopback_devicename.content | b64decode }}"
