@@ -27,4 +27,5 @@
     part_start: "{{ partition.part_start | default(omit) }}"
     part_end: "{{ partition.part_end | default(omit) }}"
     label: "{{ partition.label | default(omit) }}"
+    resize: "{{ partition.resize | default(omit) }}"
     state: present
