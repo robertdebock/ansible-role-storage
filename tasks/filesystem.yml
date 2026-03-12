@@ -11,7 +11,7 @@
     dev: "{{ filesystem.name }}"
     fstype: "{{ filesystem.fstype | default(storage_default_fstype) }}"
   when:
-    - ansible_os_family != 'Alpine'
+    - ansible_facts['os_family'] != 'Alpine'
   notify:
     - Reload systemd
 
