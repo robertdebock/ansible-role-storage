@@ -5,7 +5,7 @@
   ansible.builtin.systemd:
     daemon_reload: true
   when:
-    - ansible_service_mgr == 'systemd'
+    - ansible_facts['service_mgr'] == 'systemd'
 
 - name: Run vgscan --mknodes
   ansible.builtin.command:

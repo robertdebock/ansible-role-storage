@@ -95,11 +95,11 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
         cmd: losetup -D
       changed_when: true
       when:
-        - ansible_distribution != "Alpine"
+        - ansible_facts['distribution'] != "Alpine"
 
     - name: Remove loop_device on Alpine
       when:
-        - ansible_distribution == "Alpine"
+        - ansible_facts['distribution'] == "Alpine"
       block:
         - name: Find loop devices
           ansible.builtin.command:

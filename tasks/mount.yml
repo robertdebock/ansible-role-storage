@@ -31,7 +31,7 @@
     cmd: systemctl daemon-reload  # noqa: command-instead-of-module
   changed_when: false
   when:
-    - ansible_service_mgr == "systemd"
+    - ansible_facts['service_mgr'] == "systemd"
 
 - name: mount | Mount filessytem
   ansible.posix.mount:
