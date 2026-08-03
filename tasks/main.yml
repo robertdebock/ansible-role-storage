@@ -24,6 +24,8 @@
     line: "- - -"
     mode: "0444"
   loop: "{{ storage_scsi_busses.files }}"
+  loop_control:
+    label: "{{ item.path }}"
   changed_when: false
 
 - name: Include partition
@@ -31,7 +33,7 @@
     file: partition.yml
   loop: "{{ storage_partitions }}"
   loop_control:
-    loop_control: "{{ item.name }}"
+    label: "{{ partition.name }}:{{ partition.number }}"
     loop_var: partition
   when:
     - storage_partitions is defined
@@ -41,7 +43,7 @@
     file: volumegroup.yml
   loop: "{{ storage_volumegroups }}"
   loop_control:
-    loop_control: "{{ item.name }}"
+    label: "{{ volumegroup.name }}"
     loop_var: volumegroup
   when:
     - storage_volumegroups is defined
@@ -51,7 +53,7 @@
     file: volume.yml
   loop: "{{ storage_volumes }}"
   loop_control:
-    loop_control: "{{ item.name }}"
+    label: "{{ volume.vg }}/{{ volume.name }}"
     loop_var: volume
   when:
     - storage_volumes is defined
@@ -61,7 +63,7 @@
     file: filesystem.yml
   loop: "{{ storage_filesystems }}"
   loop_control:
-    loop_control: "{{ item.name }}"
+    label: "{{ filesystem.name }}"
     loop_var: filesystem
   when:
     - storage_filesystems is defined
@@ -71,7 +73,7 @@
     file: mount.yml
   loop: "{{ storage_mounts }}"
   loop_control:
-    loop_control: "{{ item.name }}"
+    label: "{{ mount.name }}"
     loop_var: mount
   when:
     - storage_mounts is defined
