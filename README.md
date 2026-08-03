@@ -229,7 +229,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |[Fedora](https://hub.docker.com/r/robertdebock/fedora)|all|
 |[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|all|
 
-The minimum version of Ansible required is 2.12, tests have been done on:
+The minimum version of Ansible required is 2.16, tests have been done on:
 
 - The previous version.
 - The current version.

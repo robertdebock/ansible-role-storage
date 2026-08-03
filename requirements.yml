@@ -3,4 +3,5 @@ roles:
   - name: robertdebock.bootstrap
 collections:
   - name: ansible.posix
+    version: ">=2.2.0"
   - name: community.general
