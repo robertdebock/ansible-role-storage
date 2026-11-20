@@ -29,7 +29,8 @@
 - name: mount | Reload systemd
   ansible.builtin.command:
     cmd: systemctl daemon-reload  # noqa: command-instead-of-module
-  changed_when: false
+  changed_when:
+    - false
   when:
     - ansible_facts['service_mgr'] == "systemd"
 

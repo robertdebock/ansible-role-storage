@@ -26,7 +26,8 @@
   loop: "{{ storage_scsi_busses.files }}"
   loop_control:
     label: "{{ item.path }}"
-  changed_when: false
+  changed_when:
+    - false
 
 - name: Include partition
   ansible.builtin.include_tasks:
